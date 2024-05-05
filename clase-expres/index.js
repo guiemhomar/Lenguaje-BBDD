@@ -57,3 +57,38 @@ app.post("/persona", (req, res) => {
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })
+
+
+//act 6.01
+app.get("/usuaris", (req, res) => {
+    const rows = db.prepare('SELECT * FROM Usuarios').all();
+    res.send(rows);
+});
+
+app.get('/usuari', (req, res) => {
+    const usuariId = req.query.id;
+    const row = db.prepare('SELECT * FROM Usuarios WHERE id = ?').get(usuariId);
+    res.send(row);
+});
+
+app.get("/productes", (req, res) => {
+    const rows = db.prepare('SELECT * FROM productes').all();
+    res.send(rows);
+});
+
+app.get('/producte', (req, res) => {
+    const producteId = req.query.id;
+    const row = db.prepare('SELECT * FROM productes WHERE id = ?').get(producteId);
+    res.send(row);
+});
+
+app.get("/comandes", (req, res) => {
+    const rows = db.prepare('SELECT comandes.id, Usuarios.nom AS usuari_nom, Usuarios.email, productes.nom AS producte_nom, productes.preu FROM comandes INNER JOIN Usuarios ON comandes.usuari_id = Usuarios.id INNER JOIN productes ON comandes.producte_id = productes.id').all();
+    res.send(rows);
+});
+
+app.get('/comanda', (req, res) => {
+    const comandaId = req.query.id;
+    const row = db.prepare('SELECT comandes.id, Usuarios.nom AS usuari_nom, Usuarios.email, productes.nom AS producte_nom, productes.preu FROM comandes INNER JOIN Usuarios ON comandes.usuari_id = Usuarios.id INNER JOIN productes ON comandes.producte_id = productes.id WHERE comandes.id = ?').get(comandaId);
+    res.send(row);
+});
