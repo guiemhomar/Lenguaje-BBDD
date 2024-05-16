@@ -1,0 +1,17 @@
+<%- include ("header") %>
+
+<form action="usuari" method="post">
+  <div class="input-group flex-nowrap">
+    <span class="input-group-text" id="addon-wrapping">@</span>
+    <input type="email" required name="email" id="email" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">
+  </div>
+  
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="inputGroup-sizing-default">Username</span>
+    <input type="text" required name="nom" id="nom" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+  </div>
+
+  <button class="btn btn-primary" type="submit" value="Submit">Submit</button>
+</form>
+
+<%- include ("footer") %>

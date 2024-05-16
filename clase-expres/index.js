@@ -1,7 +1,7 @@
 const express = require('express')
 const db = require('better-sqlite3')('personas.sqlite');
 const db1 = require('better-sqlite3')('productes.sqlite');
-const db2 = require('better-sqlite3')('Usuarios.sqlite');
+const db2 = require('better-sqlite3')('usuaris.sqlite');
 const db3 = require('better-sqlite3')('comandes.sqlite');
 
 
@@ -65,13 +65,13 @@ app.listen(port, () => {
 
 //act 6.01
 app.get("/usuaris", (req, res) => {
-    const rows = db2.prepare('SELECT * FROM Usuarios').all();
+    const rows = db2.prepare('SELECT * FROM usuaris').all();
     res.send(rows);
 });
 
 app.get('/usuari', (req, res) => {
     const usuariId = req.query.id;
-    const row = db2.prepare('SELECT * FROM Usuarios WHERE id = ?').get(usuariId);
+    const row = db2.prepare('SELECT * FROM usuaris WHERE id = ?').get(usuariId);
     res.send(row);
 });
 
@@ -87,12 +87,12 @@ app.get('/producte', (req, res) => {
 });
 
 app.get("/comandes", (req, res) => {
-    const rows = db3.prepare('SELECT comandes.id, Usuarios.nom AS usuari_nom, Usuarios.email, productes.nom AS producte_nom, productes.preu FROM comandes INNER JOIN Usuarios ON comandes.usuari_id = Usuarios.id INNER JOIN productes ON comandes.producte_id = productes.id').all();
+    const rows = db3.prepare('SELECT comandes.id, usuaris.nom AS usuari_nom, usuaris.email, productes.nom AS producte_nom, productes.preu FROM comandes INNER JOIN usuaris ON comandes.usuari_id = usuaris.id INNER JOIN productes ON comandes.producte_id = productes.id').all();
     res.send(rows);
 });
 
 app.get('/comanda', (req, res) => {
     const comandaId = req.query.id;
-    const row = db3.prepare('SELECT comandes.id, Usuarios.nom AS usuari_nom, Usuarios.email, productes.nom AS producte_nom, productes.preu FROM comandes INNER JOIN Usuarios ON comandes.usuari_id = Usuarios.id INNER JOIN productes ON comandes.producte_id = productes.id WHERE comandes.id = ?').get(comandaId);
+    const row = db3.prepare('SELECT comandes.id, usuaris.nom AS usuari_nom, usuaris.email, productes.nom AS producte_nom, productes.preu FROM comandes INNER JOIN usuaris ON comandes.usuari_id = usuaris.id INNER JOIN productes ON comandes.producte_id = productes.id WHERE comandes.id = ?').get(comandaId);
     res.send(row);
 });

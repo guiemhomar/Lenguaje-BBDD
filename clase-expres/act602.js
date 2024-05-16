@@ -1,82 +1,63 @@
 const express = require('express')
+const path = require('path'); 
 const db1 = require('better-sqlite3')('productes.sqlite');
-const db2 = require('better-sqlite3')('Usuarios.sqlite');
+const db2 = require('better-sqlite3')('usuaris.sqlite');
 
 
 const app = express()
 const port = 3000
 
 app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views602"));
 
 // crearemos la configuracion de la bbdd
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true }));
 
-app.get("/", (req, res) =>{
-    res.render("index", msgs={msgs: ["Hola", "desde", "la", "ruta"]});
-})
-
-app.get('/personas', (req, res) => {
-    //aqui hare el select
-    resultadoSelect = "SELECT * from personas"
-    const rows = db.prepare('SELECT * from personas').all();
+//act 6.01
+app.get("/usuaris", (req, res) => {
+    resultadoSelect = "SELECT * from usuaris"
+    const rows = db2.prepare('SELECT * from usuaris').all();
     res.send(rows)
-})
+});
 
-//devolveremos el render de la vist con un form
-app.get('/persona', (req, res) => {
-    //aqui hare el select
-    // personaId = req.query.id;
-    // const row = db.prepare('SELECT * from personas WHERE id = ?').get(personaId);
-    // res.send(row)
+app.get('/usuari', (req, res) => {
+    res.render("usuari")
+});
 
-    res.render("persona")
-})
-
-//caputraremos el submit del formulario
-app.post("/persona", (req, res) => {
-    // personaId = req.body.id;
-    // console.log(personaId);
-    // const row = db.prepare('SELECT * from personas WHERE id = ?').get(personaId);
-    // console.log(row);
-    // res.send(row)
-
+app.post("/usuari", (req, res) => {
     console.log(req.body);
-    if (req.body.nombre && req.body.apellidos){
+    if (req.body.nom && req.body.email){
         //insert
-        const insert = db.prepare("INSERT INTO personas (nombre, apellidos) VALUES(?, ?");
-        const info = insert.run(req.body.nombre, req.body.apellidos);
+        const insert = db2.prepare("INSERT INTO usuaris (nom, email) VALUES(?, ?)");
+        const info = insert.run(req.body.nom, req.body.email);
         console.log(info);
     }
-    res.redirect("persona");
+    res.redirect("usuari");
+})
+
+app.get("/productes", (req, res) => {
+    resultadoSelect = "SELECT * from productes"
+    const rows = db1.prepare('SELECT * from productes').all();
+    res.send(rows)
+});
+
+app.get('/producte', (req, res) => {
+    res.render("producte")
+});
+
+app.post("/producte", (req, res) => {
+    console.log(req.body);
+    if (req.body.nom && req.body.preu){
+        //insert
+        const insert = db1.prepare("INSERT INTO productes (nom, preu) VALUES(?, ?)");
+        const info = insert.run(req.body.nom, req.body.preu);
+        console.log(info);
+    }
+    res.redirect("producte");
 })
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })
-
-
-//act 6.01
-app.get("/usuaris", (req, res) => {
-    const rows = db2.prepare('SELECT * FROM Usuarios').all();
-    res.send(rows);
-});
-
-app.get('/usuari', (req, res) => {
-    const usuariId = req.query.id;
-    const row = db2.prepare('SELECT * FROM Usuarios WHERE id = ?').get(usuariId);
-    res.send(row);
-});
-
-app.get("/productes", (req, res) => {
-    const rows = db1.prepare('SELECT * FROM productes').all();
-    res.send(rows);
-});
-
-app.get('/producte', (req, res) => {
-    const producteId = req.query.id;
-    const row = db1.prepare('SELECT * FROM productes WHERE id = ?').get(producteId);
-    res.send(row);
-});
-
