@@ -1,17 +1,18 @@
 <%- include ("header") %>
 
-<form action="producte" method="post">
-  <div class="input-group flex-nowrap">
-    <span class="input-group-text" id="addon-wrapping">quantitat</span>
-    <input type="text" required pattern="[0-9]+" title="Por favor, introduce solo números positivos" name="preu" id="preu" class="form-control" placeholder="1, 2, 3, 4 ..." aria-label="Username" aria-describedby="addon-wrapping">
-  </div>
-  
-  <div class="input-group mb-3">
-    <span class="input-group-text" id="inputGroup-sizing-default">nom</span>
-    <input type="text" required name="nom" id="nom" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-  </div>
-
-  <button class="btn btn-primary" type="submit" value="Submit">Submit</button>
-</form>
+<div class="container">
+  <h2>Crear Producto</h2>
+  <form action="producte" method="post">
+    <div class="mb-3">
+      <label for="preu" class="form-label">Quantitat</label>
+      <input type="text" required pattern="[0-9]+" title="Por favor, introduce solo números positivos" name="preu" id="preu" class="form-control" placeholder="1, 2, 3, 4 ..." aria-label="Quantitat">
+    </div>
+    <div class="mb-3">
+      <label for="nom" class="form-label">Nom</label>
+      <input type="text" required name="nom" id="nom" class="form-control" aria-label="Nom">
+    </div>
+    <button class="btn btn-primary" type="submit" value="Submit">Submit</button>
+  </form>
+</div>
 
 <%- include ("footer") %>

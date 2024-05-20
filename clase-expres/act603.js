@@ -17,9 +17,9 @@ app.get('/', (req, res) => {
     res.render('index603.ejs');
 });
 
-app.get("/usuaris", (req, res) => {
-    const rows = db2.prepare('SELECT * from usuaris').all();
-    res.render('usuaris', { users: rows });
+app.get('/usuaris', (req, res) => {
+    const rows = db2.prepare('SELECT * FROM usuaris').all();
+    res.render('usuari_boton', { users: rows });
 });
 
 app.get('/usuari', (req, res) => {
@@ -27,16 +27,21 @@ app.get('/usuari', (req, res) => {
 });
 
 app.post("/usuari", (req, res) => {
-    console.log(req.body);
     if (req.body.nom && req.body.email){
         const insert = db2.prepare("INSERT INTO usuaris (nom, email) VALUES(?, ?)");
         const info = insert.run(req.body.nom, req.body.email);
-        console.log(info);
     }
-    res.redirect("/usuari");
+    res.redirect("/usuaris");
 });
 
+app.get('/usuari/:id', (req, res) => {
+    const user = db2.prepare('SELECT * FROM usuaris WHERE id = ?').get(req.params.id);
+    res.render('usuari_detalle', { user });
+});
 
+app.get('/', (req, res) => {
+    res.render('usuari');
+});
 // ---------------------------------------------------------------------------------------------------------------------
 
 app.get("/productes", (req, res) => {
