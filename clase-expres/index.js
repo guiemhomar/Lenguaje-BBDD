@@ -2,7 +2,7 @@ const express = require('express')
 const db = require('better-sqlite3')('personas.sqlite');
 const db1 = require('better-sqlite3')('productes.sqlite');
 const db2 = require('better-sqlite3')('usuaris.sqlite');
-const db3 = require('better-sqlite3')('comandes.sqlite');
+const db3 = require('better-sqlite3')('comanda.sqlite');
 
 
 const app = express()

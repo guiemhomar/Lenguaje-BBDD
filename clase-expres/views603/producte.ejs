@@ -1,0 +1,17 @@
+<%- include ("header") %>
+
+<form action="producte" method="post">
+  <div class="input-group flex-nowrap">
+    <span class="input-group-text" id="addon-wrapping">quantitat</span>
+    <input type="text" required pattern="[0-9]+" title="Por favor, introduce solo números positivos" name="preu" id="preu" class="form-control" placeholder="1, 2, 3, 4 ..." aria-label="Username" aria-describedby="addon-wrapping">
+  </div>
+  
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="inputGroup-sizing-default">nom</span>
+    <input type="text" required name="nom" id="nom" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+  </div>
+
+  <button class="btn btn-primary" type="submit" value="Submit">Submit</button>
+</form>
+
+<%- include ("footer") %>

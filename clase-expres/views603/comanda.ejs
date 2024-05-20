@@ -1,0 +1,15 @@
+<%- include("header") %>
+<form action="comanda" method="post">
+  <div class="input-group flex-nowrap">
+    <span class="input-group-text" id="addon-wrapping">&</span>
+    <input type="usuari_id" required name="usuari_id" id="usuari_id" class="form-control" placeholder="" aria-label="" aria-describedby="addon-wrapping">
+  </div>
+  
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="inputGroup-sizing-default">&</span>
+    <input type="producte_id" required name="producte_id" id="producte_id" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+  </div>
+
+  <button class="btn btn-primary" type="submit" value="Submit">Submit</button>
+</form>
+<%- include("footer") %>
