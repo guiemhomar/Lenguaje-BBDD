@@ -76,9 +76,9 @@ app.get('/comanda', (req, res) => {
 
 app.post("/comanda", (req, res) => {
     console.log(req.body);
-    if (req.body.nom && req.body.preu){
-        const insert = db3.prepare("INSERT INTO comandes (nom, preu) VALUES(?, ?)");
-        const info = insert.run(req.body.nom, req.body.preu);
+    if (req.body.usuari_id && req.body.producte_id){
+        const insert = db3.prepare("INSERT INTO comandes (usuari_id, producte_id) VALUES(?, ?)");
+        const info = insert.run(req.body.usuari_id, req.body.producte_id);
         console.log(info);
     }
     res.redirect("/comanda");
