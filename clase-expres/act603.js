@@ -46,7 +46,7 @@ app.get('/', (req, res) => {
 
 app.get("/productes", (req, res) => {
     const rows = db1.prepare('SELECT * from productes').all();
-    res.send(rows);
+    res.render('producte_boton', { products: rows });
 });
 
 app.get('/producte', (req, res) => {
@@ -54,13 +54,20 @@ app.get('/producte', (req, res) => {
 });
 
 app.post("/producte", (req, res) => {
-    console.log(req.body);
     if (req.body.nom && req.body.preu){
         const insert = db1.prepare("INSERT INTO productes (nom, preu) VALUES(?, ?)");
         const info = insert.run(req.body.nom, req.body.preu);
-        console.log(info);
     }
-    res.redirect("/producte");
+    res.redirect("/productes");
+});  
+
+app.get('/producte/:id', (req, res) => {
+    const product = db1.prepare('SELECT * FROM productes WHERE id = ?').get(req.params.id);
+    res.render('producte_detalle', { product });
+});
+
+app.get('/', (req, res) => {
+    res.render('producte');
 });
 
 // ---------------------------------------------------------------------------------------------------------------------
