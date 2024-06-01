@@ -1,0 +1,15 @@
+<%- include("header") %>
+
+<div class="container">
+  <h2>Lista de Productos</h2>
+  <ul>
+    <% products.forEach(product => { %>
+      <li>
+        <a href="/producte/<%= product.id %>"><%= product.nom %></a>
+      </li>
+    <% }); %>
+  </ul>
+  <a href="/producte" class="btn btn-primary">Crear Producto</a>
+</div>
+
+<%- include("footer") %>

@@ -1,0 +1,21 @@
+<%- include("header") %>
+
+<div class="container">
+  <h2>Llista de Comandes</h2>
+  <table class="table">
+      <tr>
+        <th>ID</th>
+        <th>Usuari ID</th>
+        <th>Producte ID</th>
+      </tr>
+      <% comandes.forEach(comanda => { %>
+        <tr>
+          <td><%= comanda.id %></td>
+          <td><%= comanda.usuari_id %></td>
+          <td><%= comanda.producte_id %></td>
+        </tr>
+      <% }); %>
+  </table>
+</div>
+
+<%- include("footer") %>

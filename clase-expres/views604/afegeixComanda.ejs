@@ -1,0 +1,26 @@
+<%- include("header") %>
+
+<div class="container">
+  <h2>Crear Comanda</h2>
+  <form action="/afegeixComanda" method="post">
+    <div class="mb-3">
+      <label for="usuari_id" class="form-label">Usuari</label>
+      <select class="form-control" id="usuari_id" name="usuari_id" required>
+        <% usuaris.forEach(usuario => { %>
+          <option value="<%= usuario.id %>"><%= usuario.nom %> - <%= usuario.email %></option>
+        <% }); %>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="producte_id" class="form-label">Producte</label>
+      <select class="form-control" id="producte_id" name="producte_id" required>
+        <% productes.forEach(producte => { %>
+          <option value="<%= producte.id %>"><%= producte.nom %> - <%= producte.preu %>€</option>
+        <% }); %>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Crear Comanda</button>
+  </form>
+</div>
+
+<%- include("footer") %>
