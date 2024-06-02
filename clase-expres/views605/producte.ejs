@@ -1,0 +1,18 @@
+<%- include ("header") %>
+
+<div class="container">
+  <h2>Crear Producto</h2>
+  <form action="/producte" method="post">
+    <div class="mb-3">
+      <label for="preu" class="form-label">Precio</label>
+      <input type="text" required pattern="[0-9]+" title="Por favor, introduce solo números positivos" name="preu" id="preu" class="form-control" placeholder="1, 2, 3, 4 ..." aria-label="Precio">
+    </div>
+    <div class="mb-3">
+      <label for="nom" class="form-label">Nombre</label>
+      <input type="text" required name="nom" id="nom" class="form-control" aria-label="Nombre">
+    </div>
+    <button class="btn btn-primary" type="submit">Crear Producto</button>
+  </form>
+</div>
+
+<%- include ("footer") %>

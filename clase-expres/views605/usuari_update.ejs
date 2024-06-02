@@ -1,0 +1,32 @@
+<%- include("header") %>
+
+<div class="container">
+  <h2>Actualizar Usuario</h2>
+
+  <form action="/actualitzaUsuari/<%= user.id %>" method="post">
+    <input type="hidden" name="id" value="<%= user.id %>">
+    <div class="mb-3">
+      <label for="nom" class="form-label">Nombre</label>
+      <input type="text" class="form-control" id="nom" name="nom" value="<%= user.nom %>" required>
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Correo Electrónico</label>
+      <input type="email" class="form-control" id="email" name="email" value="<%= user.email %>" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Actualizar</button>
+  </form>
+
+  <h2>Lista de Todos los Usuarios</h2>
+  <ul>
+    <% users.forEach(u => { %>
+      <li>
+        <form action="/actualitzaUsuari/<%= u.id %>" method="get" style="display: inline-block;">
+          <button type="submit" class="btn btn-link">Editar</button>
+        </form>
+        <%= u.nom %> - <%= u.email %>
+      </li>
+    <% }); %>
+  </ul>
+</div>
+
+<%- include("footer") %>

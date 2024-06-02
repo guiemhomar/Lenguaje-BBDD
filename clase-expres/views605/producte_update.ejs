@@ -1,0 +1,32 @@
+<%- include("header") %>
+
+<div class="container">
+  <h2>Actualizar Producto</h2>
+
+  <form action="/actualitzaProducte/<%= product.id %>" method="post">
+    <input type="hidden" name="id" value="<%= product.id %>">
+    <div class="mb-3">
+      <label for="nom" class="form-label">Nombre</label>
+      <input type="text" class="form-control" id="nom" name="nom" value="<%= product.nom %>" required>
+    </div>
+    <div class="mb-3">
+      <label for="preu" class="form-label">Precio</label>
+      <input type="number" step="0.01" class="form-control" id="preu" name="preu" value="<%= product.preu %>" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Actualizar</button>
+  </form>
+
+  <h2>Lista de Todos los Productos</h2>
+  <ul>
+    <% products.forEach(p => { %>
+      <li>
+        <form action="/actualitzaProducte/<%= p.id %>" method="get" style="display: inline-block;">
+          <button type="submit" class="btn btn-link">Editar</button>
+        </form>
+        <%= p.nom %>
+      </li>
+    <% }); %>
+  </ul>
+</div>
+
+<%- include("footer") %>
